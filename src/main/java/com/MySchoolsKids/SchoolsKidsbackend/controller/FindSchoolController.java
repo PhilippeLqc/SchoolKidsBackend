@@ -1,7 +1,9 @@
 package com.MySchoolsKids.SchoolsKidsbackend.controller;
 
 import com.MySchoolsKids.SchoolsKidsbackend.model.School;
+import com.MySchoolsKids.SchoolsKidsbackend.response.SchoolApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,26 +20,36 @@ import java.util.stream.Collectors;
 @RequestMapping("/school")
 public class FindSchoolController {
     @GetMapping("/findSchool")
-    public ResponseEntity<Object> findSchools(@RequestParam("latitude") double latitude,
-                                              @RequestParam("longitude") double longitude,
-                                              @RequestParam("schoolType") String schoolType,
-                                              @RequestParam("schoolStatus") String schoolStatus,
-                                              @RequestParam("distance") double distance) throws JsonProcessingException {
+    public ResponseEntity<Object> findSchools(
+            @RequestParam("lng") double lng,
+            @RequestParam("lat") double lat,
+            @RequestParam("schoolType") String schoolType,
+            @RequestParam("schoolStatus") String schoolStatus,
+            @RequestParam("distance") double distance) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
+/*TODO: change the api url to the one that we need to use*/
+        String apiUrl = "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-annuaire-education/records?limit=-1";
+        /*apiUrl += "&refine=type_etablissement%3A" + schoolType;
+        apiUrl += "&refine=statut_public_prive%3A" + schoolStatus;*/
+
+        // need to see the apiurl  in the console
+        System.out.println("test api url" + apiUrl);
+
         ResponseEntity<String> response = restTemplate.exchange(
-                "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-annuaire-education/records?",
+                apiUrl,
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        School[] allSchools = objectMapper.readValue(response.getBody(), School[].class);
+        SchoolApiResponse schoolResponse = objectMapper.readValue(response.getBody(), SchoolApiResponse.class);
 
-        List<School> filteredSchools = Arrays.stream(allSchools)
-                .filter(school -> school.getTypeEstablishment().equals(schoolType)
-                        && school.getStatutePublicPrivate().equals(schoolStatus)
-                        && calculateDistance(latitude, longitude, school.getLatitude(), school.getLongitude()) <= distance)
+
+        List<School> filteredSchools = schoolResponse.getResults().stream()
+                .filter(school -> school.getNomEtablissement().contains(schoolType)
+                        && school.getStatutPublicPrive().contains(schoolStatus)
+                        /*&& calculateDistance(lat, lng, school.getLatitude(), school.getLongitude()) <= distance*/)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(filteredSchools);

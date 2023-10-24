@@ -1,94 +1,227 @@
 package com.MySchoolsKids.SchoolsKidsbackend.model;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class School {
-    private String identifiant_de_l_etablissement;
-    private String nom_etablissement;
-    private String type_etablissement;
-    private String statut_public_prive;
-    private String adresse_1;
-    private String adresse_2;
-    private String adresse_3;
-    private String code_postal;
-    private String code_commune;
-    private String nom_commune;
-    private String code_departement;
-    private String code_academie;
-    private String code_region;
-    private int ecole_maternelle;
-    private int ecole_elementaire;
-    private String voie_generale;
-    private String voie_technologique;
-    private String voie_professionnelle;
+    @JsonProperty("identifiant_de_l_etablissement")
+    private String identifiantEtablissement;
+
+    @JsonProperty("nom_etablissement")
+    private String nomEtablissement;
+
+    @JsonProperty("type_etablissement")
+    private String typeEtablissement;
+
+    @JsonProperty("statut_public_prive")
+    private String statutPublicPrive;
+
+    @JsonProperty("adresse_1")
+    private String adresse1;
+
+    @JsonProperty("adresse_2")
+    private String adresse2;
+
+    @JsonProperty("adresse_3")
+    private String adresse3;
+
+    @JsonProperty("code_postal")
+    private String codePostal;
+
+    @JsonProperty("code_commune")
+    private String codeCommune;
+
+    @JsonProperty("nom_commune")
+    private String nomCommune;
+
+    @JsonProperty("code_departement")
+    private String codeDepartement;
+
+    @JsonProperty("code_academie")
+    private String codeAcademie;
+
+    @JsonProperty("code_region")
+    private String codeRegion;
+
+    @JsonProperty("ecole_maternelle")
+    private int ecoleMaternelle;
+
+    @JsonProperty("ecole_elementaire")
+    private int ecoleElementaire;
+
+    @JsonProperty("voie_generale")
+    private String voieGenerale;
+
+    @JsonProperty("voie_technologique")
+    private String voieTechnologique;
+
+    @JsonProperty("voie_professionnelle")
+    private String voieProfessionnelle;
+
+    @JsonProperty("telephone")
     private String telephone;
+
+    @JsonProperty("fax")
     private String fax;
+
+    @JsonProperty("web")
     private String web;
+
+    @JsonProperty("mail")
     private String mail;
+
+    @JsonProperty("restauration")
     private int restauration;
+
+    @JsonProperty("hebergement")
     private int hebergement;
+
+    @JsonProperty("ulis")
     private int ulis;
+
+    @JsonProperty("apprentissage")
     private String apprentissage;
+
+    @JsonProperty("segpa")
     private String segpa;
-    private String section_arts;
-    private String section_cinema;
-    private String section_theatre;
-    private String section_sport;
-    private String section_internationale;
-    private String section_europeenne;
-    private String lycee_agricole;
-    private String lycee_militaire;
-    private String lycee_des_metiers;
-    private String post_bac;
-    private String appartenance_education_prioritaire;
+
+    @JsonProperty("section_arts")
+    private String sectionArts;
+
+    @JsonProperty("section_cinema")
+    private String sectionCinema;
+
+    @JsonProperty("section_theatre")
+    private String sectionTheatre;
+
+    @JsonProperty("section_sport")
+    private String sectionSport;
+
+    @JsonProperty("section_internationale")
+    private String sectionInternationale;
+
+    @JsonProperty("section_europeenne")
+    private String sectionEuropeenne;
+
+    @JsonProperty("lycee_agricole")
+    private String lyceeAgricole;
+
+    @JsonProperty("lycee_militaire")
+    private String lyceeMilitaire;
+
+    @JsonProperty("lycee_des_metiers")
+    private String lyceeDesMetiers;
+
+    @JsonProperty("post_bac")
+    private String postBac;
+
+    @JsonProperty("appartenance_education_prioritaire")
+    private String appartenanceEducationPrioritaire;
+
+    @JsonProperty("greta")
     private String greta;
-    private String siren_siret;
-    private int nombre_d_eleves;
-    private String fiche_onisep;
+
+    @JsonProperty("siren_siret")
+    private String sirenSiret;
+
+    @JsonProperty("nombre_d_eleves")
+    private int nombreEleves;
+
+    @JsonProperty("fiche_onisep")
+    private String ficheOnisep;
+
+    @JsonProperty("position")
     private Position position;
-    private String type_contrat_prive;
-    private String libelle_departement;
-    private String libelle_academie;
-    private String libelle_region;
-    private double coordx_origine;
-    private double coordy_origine;
-    private String epsg_origine;
-    private String nom_circonscription;
+
+    @JsonProperty("type_contrat_prive")
+    private String typeContratPrive;
+
+    @JsonProperty("libelle_departement")
+    private String libelleDepartement;
+
+    @JsonProperty("libelle_academie")
+    private String libelleAcademie;
+
+    @JsonProperty("libelle_region")
+    private String libelleRegion;
+
+    @JsonProperty("coordx_origine")
+    private double coordxOrigine;
+
+    @JsonProperty("coordy_origine")
+    private double coordyOrigine;
+
+    @JsonProperty("epsg_origine")
+    private String epsgOrigine;
+
+    @JsonProperty("nom_circonscription")
+    private String nomCirconscription;
+
+    @JsonProperty("latitude")
     private double latitude;
+
+    @JsonProperty("longitude")
     private double longitude;
-    private String precision_localisation;
-    private String date_ouverture;
-    private String date_maj_ligne;
+
+    @JsonProperty("precision_localisation")
+    private String precisionLocalisation;
+
+    @JsonProperty("date_ouverture")
+    private String dateOuverture;
+
+    @JsonProperty("date_maj_ligne")
+    private String dateMajLigne;
+
+    @JsonProperty("etat")
     private String etat;
-    private String ministere_tutelle;
-    private int multi_uai;
-    private int rpi_concentre;
-    private String rpi_disperse;
-    private int code_nature;
-    private String libelle_nature;
-    private String code_type_contrat_prive;
+
+    @JsonProperty("ministere_tutelle")
+    private String ministereTutelle;
+
+    @JsonProperty("multi_uai")
+    private int multiUai;
+
+    @JsonProperty("rpi_concentre")
+    private int rpiConcentre;
+
+    @JsonProperty("rpi_disperse")
+    private String rpiDisperse;
+
+    @JsonProperty("code_nature")
+    private int codeNature;
+
+    @JsonProperty("libelle_nature")
+    private String libelleNature;
+
+    @JsonProperty("code_type_contrat_prive")
+    private String codeTypeContratPrive;
+
+    @JsonProperty("pial")
     private String pial;
-    private String etablissement_mere;
-    private String type_rattachement_etablissement_mere;
-    private String code_zone_animation_pedagogique;
-    private String libelle_zone_animation_pedagogique;
 
-    public School() {
+    @JsonProperty("etablissement_mere")
+    private String etablissementMere;
 
-    }
+    @JsonProperty("type_rattachement_etablissement_mere")
+    private String typeRattachementEtablissementMere;
 
-    // Getters and setters
-    public Object getTypeEstablishment() {
-        return type_etablissement;
-    }
+    @JsonProperty("code_zone_animation_pedagogique")
+    private String codeZoneAnimationPedagogique;
 
-    public Object getStatutePublicPrivate() {
-        return statut_public_prive;
-    }
+    @JsonProperty("libelle_zone_animation_pedagogique")
+    private String libelleZoneAnimationPedagogique;
 
-    public double getLongitude() {
-        return longitude;
-    }
+    // Getters and setters for the fields
+@Data
+    public static class Position {
+        @JsonProperty("lon")
+        private double lon;
 
-    public double getLatitude() {
-        return latitude;
+        @JsonProperty("lat")
+        private double lat;
+
+        // Getters and setters for lon and lat
     }
 }
